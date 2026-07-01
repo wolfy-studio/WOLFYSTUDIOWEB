@@ -239,6 +239,41 @@
     gap:6px;
   }
 
+  .code-box{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+  .code-input{
+    flex:1;
+    min-width:160px;
+    background:#17181b;
+    border:1px solid #2c2d31;
+    border-radius:9px;
+    padding:11px 14px;
+    color:var(--text);
+    font-family:'Rajdhani', sans-serif;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:1px;
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  .code-input::placeholder{ color:var(--muted); font-weight:500; letter-spacing:0.3px; }
+  .code-input:focus{ border-color:rgba(230,165,60,0.5); }
+  .code-input.error{ border-color:#ff5b5b; animation:shake .3s ease; }
+  @keyframes shake{
+    25%{ transform:translateX(-4px); }
+    75%{ transform:translateX(4px); }
+  }
+  .code-error{
+    color:#ff8080;
+    font-size:13px;
+    margin-top:8px;
+    display:none;
+  }
+
   @media (prefers-reduced-motion: reduce){
     .card::after{ animation:none; }
   }
@@ -270,8 +305,12 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8c-1-1.1-1.6-2.5-1.6-4.1h-3.1v14.5c0 1.6-1.3 2.9-2.9 2.9s-2.9-1.3-2.9-2.9 1.3-2.9 2.9-2.9c.3 0 .6 0 .9.1V10.2c-.3 0-.6-.1-.9-.1-3.4 0-6.1 2.7-6.1 6.1S6.5 22.3 9.9 22.3s6.1-2.7 6.1-6.1V8.6c1.3.9 2.9 1.5 4.6 1.5V7c-1.4 0-2.7-.5-3.6-1.3-.1 0-.3-.1-.4 0z"/></svg>
           Follow TikTok
         </button>
-        <button class="btn-ghost" id="confirmBtn">Saya Sudah Follow ✓</button>
       </div>
+      <div class="code-box">
+        <input type="text" class="code-input" id="codeInput" placeholder="Masukkan kode akses dari bio/caption TikTok">
+        <button class="btn-ghost" id="confirmBtn">Buka Akses</button>
+      </div>
+      <div class="code-error" id="codeError">Kode salah, cek lagi bio/caption TikTok kami ya.</div>
     </div>
   </div>
 
@@ -284,7 +323,7 @@
 
       <div class="locked-note" id="lockedNote">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        Terkunci sampai follow dikonfirmasi
+        Terkunci sampai kode akses benar
       </div>
 
       <div class="downloads" id="downloadsList" style="display:none;">
@@ -311,34 +350,50 @@
   // ====== KUSTOMISASI DI SINI ======
   const CHANNEL_NAME = "WOLFY STUDIO";
   const SUBSCRIBE_URL = "https://www.tiktok.com/@wolfy2315?lang=id-ID";
+  const ACCESS_CODE = "WOLFY123"; // ganti ini kapan saja, lalu update juga di bio/caption TikTok kamu
   // ==================================
 
   document.getElementById('channelName').textContent = CHANNEL_NAME;
   document.getElementById('siteTitle').textContent = CHANNEL_NAME.toUpperCase();
 
-  let subscribed = false; // state disimpan di memori, reset saat halaman di-refresh
-
   document.getElementById('subscribeBtn').addEventListener('click', () => {
     window.open(SUBSCRIBE_URL, '_blank');
   });
 
-  document.getElementById('confirmBtn').addEventListener('click', function(){
-    subscribed = true;
-    this.classList.add('confirmed');
-    this.textContent = 'Terkonfirmasi ✓';
-
+  function unlockAccess(){
     const step1 = document.getElementById('step1');
     const step2 = document.getElementById('step2');
     step1.classList.remove('active');
     step1.classList.add('done');
-    document.getElementById('step1').querySelector('.num').textContent = '✓';
+    step1.querySelector('.num').textContent = '✓';
 
     step2.classList.remove('disabled');
     step2.classList.add('active');
     step2.querySelector('.num').textContent = '2';
-    document.getElementById('step2desc').textContent = 'Semua tool terbuka! Pilih dan unduh di bawah.';
+    document.getElementById('step2desc').textContent = 'Semua tool terbuka! Pilih dan kunjungi di bawah.';
     document.getElementById('lockedNote').style.display = 'none';
     document.getElementById('downloadsList').style.display = 'flex';
+  }
+
+  function checkCode(){
+    const input = document.getElementById('codeInput');
+    const errorMsg = document.getElementById('codeError');
+    const entered = input.value.trim().toUpperCase();
+
+    if(entered === ACCESS_CODE.toUpperCase()){
+      errorMsg.style.display = 'none';
+      input.classList.remove('error');
+      unlockAccess();
+    } else {
+      errorMsg.style.display = 'block';
+      input.classList.add('error');
+      setTimeout(() => input.classList.remove('error'), 300);
+    }
+  }
+
+  document.getElementById('confirmBtn').addEventListener('click', checkCode);
+  document.getElementById('codeInput').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') checkCode();
   });
 </script>
 
