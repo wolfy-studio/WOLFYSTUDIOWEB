@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Gate</title>
+<title>DEVELOPMENT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -79,8 +79,10 @@
     border:1px solid #2f3034;
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 0 0 1px rgba(230,165,60,0.08), 0 18px 30px -12px rgba(0,0,0,0.6);
+    overflow:hidden;
   }
   .emblem svg{ width:36px; height:36px; }
+  .emblem img{ width:100%; height:100%; object-fit:cover; }
 
   h1{
     font-family:'Chakra Petch', sans-serif;
@@ -250,16 +252,7 @@
 
 <div class="card">
   <div class="emblem">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4z" stroke="url(#g)" stroke-width="1.6" stroke-linejoin="round"/>
-      <path d="M9 12l2 2 4-4" stroke="url(#g)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="g" x1="4" y1="2" x2="20" y2="22">
-          <stop stop-color="#ffc36b"/>
-          <stop offset="1" stop-color="#e6a53c"/>
-        </linearGradient>
-      </defs>
-    </svg>
+    <img src="logo.png" alt="Wolfy Studio">
   </div>
 
   <h1 id="siteTitle">Nama Channel Free Gate</h1>
@@ -270,14 +263,14 @@
   <div class="step active" id="step1">
     <div class="num">1</div>
     <div class="step-body">
-      <div class="step-title">Subscribe ke <span id="channelName">Nama Channel</span></div>
-      <div class="step-desc">Subscribe di YouTube untuk membuka semua download di bawah.</div>
+      <div class="step-title">Follow TikTok <span id="channelName">Nama Channel</span></div>
+      <div class="step-desc">Follow TikTok kami untuk membuka semua download di bawah.</div>
       <div class="actions">
         <button class="btn-primary" id="subscribeBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2 .6 9.4.6 9.4.6s7.4 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5V8.5L15.8 12l-6.2 3.5Z"/></svg>
-          Subscribe
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8c-1-1.1-1.6-2.5-1.6-4.1h-3.1v14.5c0 1.6-1.3 2.9-2.9 2.9s-2.9-1.3-2.9-2.9 1.3-2.9 2.9-2.9c.3 0 .6 0 .9.1V10.2c-.3 0-.6-.1-.9-.1-3.4 0-6.1 2.7-6.1 6.1S6.5 22.3 9.9 22.3s6.1-2.7 6.1-6.1V8.6c1.3.9 2.9 1.5 4.6 1.5V7c-1.4 0-2.7-.5-3.6-1.3-.1 0-.3-.1-.4 0z"/></svg>
+          Follow TikTok
         </button>
-        <button class="btn-ghost" id="confirmBtn">Saya Sudah Subscribe ✓</button>
+        <button class="btn-ghost" id="confirmBtn">Saya Sudah Follow ✓</button>
       </div>
     </div>
   </div>
@@ -291,23 +284,23 @@
 
       <div class="locked-note" id="lockedNote">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        Terkunci sampai subscribe dikonfirmasi
+        Terkunci sampai follow dikonfirmasi
       </div>
 
       <div class="downloads" id="downloadsList" style="display:none;">
         <div class="dl-item">
           <div>
-            <div class="dl-name">Asset Pack #1</div>
+            <div class="dl-name">Asset Pack Gratis</div>
             <div class="dl-meta">.rbxm • ganti dengan nama file kamu</div>
           </div>
-          <a href="#" class="dl-get">Unduh</a>
+          <a href="https://discord.gg/2rkRb9ap9G" target="_blank" rel="noopener" class="dl-get">Unduh</a>
         </div>
         <div class="dl-item">
           <div>
-            <div class="dl-name">Script Template</div>
+            <div class="dl-name">Order</div>
             <div class="dl-meta">.lua • ganti dengan nama file kamu</div>
           </div>
-          <a href="#" class="dl-get">Unduh</a>
+          <a href="https://discord.gg/RD43SCQtMQ" target="_blank" rel="noopener" class="dl-get">Unduh</a>
         </div>
       </div>
     </div>
@@ -317,7 +310,7 @@
 <script>
   // ====== KUSTOMISASI DI SINI ======
   const CHANNEL_NAME = "WOLFY STUDIO";
-  const SUBSCRIBE_URL = "https://www.youtube.com/channel/UCjKtW0knBNPdilVY-bKo06w?sub_confirmation=1";
+  const SUBSCRIBE_URL = "https://www.tiktok.com/@wolfy2315?lang=id-ID";
   // ==================================
 
   document.getElementById('channelName').textContent = CHANNEL_NAME;
