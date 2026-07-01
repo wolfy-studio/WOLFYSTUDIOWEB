@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasa Joki MLBB — Wolfy Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08090b;
+    --gold:#e6a53c;
+    --gold-bright:#ffc36b;
+    --text:#e8e6e2;
+    --muted:#9a9ba0;
+    --muted-2:#5b5c60;
+    --ok:#5fd68a;
+    --edge:#232427;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(230,165,60,0.12), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
+      var(--bg);
+    color:var(--text);
+    font-family:'Rajdhani', sans-serif;
+    min-height:100vh;
+    padding:48px 20px 56px;
+  }
 
+  .wrap{ max-width:640px; margin:0 auto; }
+
+  .back{
+    display:inline-flex; align-items:center; gap:6px;
+    color:var(--muted); text-decoration:none; font-size:14px;
+    margin-bottom:22px;
+  }
+  .back:hover{ color:var(--gold-bright); }
+
+  .eyebrow{
+    display:block; width:fit-content; margin:0 auto 14px;
+    font-family:'Chakra Petch', sans-serif;
+    font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--gold-bright);
+    background:rgba(230,165,60,0.10);
+    border:1px solid rgba(230,165,60,0.35);
+    padding:6px 14px; border-radius:999px;
+  }
+  h1{
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:700; text-align:center; font-size:32px;
+    letter-spacing:1px; text-transform:uppercase;
+    background:linear-gradient(180deg, #fff, var(--gold-bright));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .subtitle{ text-align:center; color:var(--muted); font-size:15px; margin-top:10px; max-width:460px; margin-left:auto; margin-right:auto; line-height:1.55; }
+
+  /* ===== Packages ===== */
+  .packages{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin:36px 0 8px;
+  }
+  .pkg{
+    background:linear-gradient(180deg, #15161a, #101113);
+    border:1px solid var(--edge);
+    border-radius:14px;
+    padding:20px 16px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .2s ease, transform .15s ease;
+    position:relative;
+  }
+  .pkg:hover{ transform:translateY(-2px); }
+  .pkg.selected{ border-color:var(--gold); box-shadow:0 0 0 1px rgba(230,165,60,0.4), 0 12px 26px -14px rgba(230,165,60,0.35); }
+  .pkg.selected::after{
+    content:'✓ Dipilih';
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:#1a1200;
+    font-family:'Chakra Petch', sans-serif; font-size:10px; font-weight:700; letter-spacing:0.5px;
+    padding:3px 10px; border-radius:999px; text-transform:uppercase;
+  }
+  .pkg-name{ font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.5px; text-transform:uppercase; color:#f4f2ee; }
+  .pkg-price{ font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:19px; color:var(--gold-bright); margin-top:8px; }
+  .pkg-price span{ font-size:11px; color:var(--muted); font-weight:500; }
+  .pkg-desc{ color:var(--muted); font-size:12.5px; margin-top:8px; line-height:1.5; }
+  .pkg-list{ list-style:none; margin-top:12px; text-align:left; display:flex; flex-direction:column; gap:6px; }
+  .pkg-list li{ font-size:12.5px; color:var(--text); display:flex; gap:6px; align-items:flex-start; }
+  .pkg-list li::before{ content:'•'; color:var(--gold); }
+
+  @media (max-width:560px){
+    .packages{ grid-template-columns:1fr; }
+  }
+
+  /* ===== Form ===== */
+  .form-card{
+    background:linear-gradient(180deg, #15161a, #101113);
+    border:1px solid var(--edge);
+    border-radius:16px;
+    padding:28px 26px;
+    margin-top:28px;
+  }
+  .form-card h2{
+    font-family:'Chakra Petch', sans-serif;
+    font-size:17px; letter-spacing:0.5px; text-transform:uppercase; color:#f4f2ee;
+    margin-bottom:18px;
+  }
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block; font-size:13px; color:var(--muted); margin-bottom:6px;
+    letter-spacing:0.3px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;
+    background:#17181b;
+    border:1px solid #2c2d31;
+    border-radius:9px;
+    padding:11px 14px;
+    color:var(--text);
+    font-family:'Rajdhani', sans-serif;
+    font-size:15px;
+    font-weight:500;
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:var(--muted-2); }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:rgba(230,165,60,0.55); }
+  .field textarea{ resize:vertical; min-height:100px; font-family:'Rajdhani', sans-serif; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:520px){ .row2{ grid-template-columns:1fr; } }
+
+  .selected-pkg-note{
+    font-size:13px; color:var(--gold-bright);
+    background:rgba(230,165,60,0.08);
+    border:1px solid rgba(230,165,60,0.3);
+    padding:9px 12px; border-radius:8px;
+    margin-bottom:18px;
+    display:none;
+  }
+
+  button[type="submit"]{
+    width:100%;
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:700; font-size:14.5px; letter-spacing:1px; text-transform:uppercase;
+    color:#1a1200;
+    background:linear-gradient(160deg, var(--gold-bright), var(--gold));
+    border:none; border-radius:10px;
+    padding:14px;
+    cursor:pointer;
+    transition:filter .15s ease, transform .15s ease;
+  }
+  button[type="submit"]:hover{ filter:brightness(1.08); }
+  button[type="submit"]:active{ transform:scale(0.98); }
+
+  .success{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+  }
+  .success .check{
+    width:64px; height:64px; margin:0 auto 18px;
+    border-radius:50%;
+    background:rgba(95,214,138,0.12);
+    border:1px solid rgba(95,214,138,0.5);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .success h2{ font-family:'Chakra Petch', sans-serif; font-size:19px; color:var(--ok); text-transform:uppercase; letter-spacing:0.5px; }
+  .success p{ color:var(--muted); font-size:14.5px; margin-top:10px; line-height:1.6; }
+  .success .summary{
+    text-align:left;
+    background:#131417; border:1px solid var(--edge); border-radius:10px;
+    padding:16px 18px; margin-top:20px; font-size:13.5px; color:var(--text);
+  }
+  .success .summary div{ padding:4px 0; }
+  .success .summary b{ color:var(--gold-bright); }
+
+  .required{ color:#ff8080; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="wolfy-studio.html" class="back">&larr; Kembali ke Wolfy Studio</a>
+
+  <span class="eyebrow">Jasa Joki Rank</span>
+  <h1>Joki Mobile Legends</h1>
+  <p class="subtitle">Naik rank aman, cepat, dan terpercaya — dikerjakan oleh player berpengalaman. Pilih paket, isi detail akun, dan tim kami akan menghubungimu untuk konfirmasi.</p>
+
+  <!-- PACKAGES -->
+  <div class="packages" id="packages">
+    <div class="pkg" data-pkg="Warrior - Master" data-price="Mulai Rp50K">
+      <div class="pkg-name">Warrior–Master</div>
+      <div class="pkg-price">Rp50K<span> / tier</span></div>
+      <div class="pkg-desc">Cocok buat kamu yang baru mulai naik dari rank rendah.</div>
+      <ul class="pkg-list">
+        <li>Proses cepat 1–2 hari</li>
+        <li>Update progress berkala</li>
+        <li>Aman, tanpa cheat</li>
+      </ul>
+    </div>
+    <div class="pkg" data-pkg="Grandmaster - Epic" data-price="Mulai Rp120K">
+      <div class="pkg-name">Grandmaster–Epic</div>
+      <div class="pkg-price">Rp120K<span> / tier</span></div>
+      <div class="pkg-desc">Untuk push rank menengah dengan winrate tinggi.</div>
+      <ul class="pkg-list">
+        <li>Player berpengalaman</li>
+        <li>Winrate terjaga</li>
+        <li>Progress harian dilaporkan</li>
+      </ul>
+    </div>
+    <div class="pkg" data-pkg="Legend - Mythic" data-price="Nego sesuai kebutuhan">
+      <div class="pkg-name">Legend–Mythic</div>
+      <div class="pkg-price">Nego<span> / sesuai target</span></div>
+      <div class="pkg-desc">Push ke Mythic / Mythical Glory, disesuaikan target dan waktu.</div>
+      <ul class="pkg-list">
+        <li>Konsultasi target & jadwal</li>
+        <li>Player rank tinggi</li>
+        <li>Fleksibel sesuai kebutuhan</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card" id="formCard">
+    <h2>Form Pemesanan</h2>
+    <div class="selected-pkg-note" id="pkgNote"></div>
+    <form id="orderForm">
+      <div class="row2">
+        <div class="field">
+          <label>Nama <span class="required">*</span></label>
+          <input type="text" id="name" placeholder="Nama kamu" required>
+        </div>
+        <div class="field">
+          <label>Kontak (WhatsApp/Discord) <span class="required">*</span></label>
+          <input type="text" id="contact" placeholder="08xx atau username#0000" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Paket</label>
+        <select id="package">
+          <option value="">Belum dipilih — klik salah satu kartu paket di atas</option>
+          <option value="Warrior - Master">Warrior–Master</option>
+          <option value="Grandmaster - Epic">Grandmaster–Epic</option>
+          <option value="Legend - Mythic">Legend–Mythic</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Rank Saat Ini</label>
+        <input type="text" id="mapType" placeholder="Contoh: Grandmaster III">
+      </div>
+
+      <div class="field">
+        <label>Target Rank & Detail Akun <span class="required">*</span></label>
+        <textarea id="details" placeholder="Target rank, ID & server game, jadwal main, atau catatan lain untuk tim kami" required></textarea>
+      </div>
+
+      <button type="submit">Kirim Pesanan</button>
+    </form>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="form-card success" id="successCard">
+    <div class="check">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5fd68a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Pesanan Terkirim</h2>
+    <p>WhatsApp akan terbuka di tab baru dengan detail pesananmu sudah terisi otomatis. Tinggal tekan kirim di sana untuk menghubungi tim Wolfy Studio.</p>
+    <div class="summary" id="summaryBox"></div>
+  </div>
+</div>
+
+<script>
+  const packages = document.querySelectorAll('.pkg');
+  const pkgSelect = document.getElementById('package');
+  const pkgNote = document.getElementById('pkgNote');
+
+  function selectPackage(name){
+    packages.forEach(p => p.classList.toggle('selected', p.dataset.pkg === name));
+    pkgSelect.value = name;
+    if(name){
+      pkgNote.style.display = 'block';
+      pkgNote.textContent = 'Paket dipilih: ' + name;
+    } else {
+      pkgNote.style.display = 'none';
+    }
+  }
+
+  packages.forEach(p => {
+    p.addEventListener('click', () => selectPackage(p.dataset.pkg));
+  });
+  pkgSelect.addEventListener('change', () => selectPackage(pkgSelect.value));
+
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const pkg = pkgSelect.value || '-';
+    const mapType = document.getElementById('mapType').value.trim() || '-';
+    const details = document.getElementById('details').value.trim();
+
+    const WA_NUMBER = '6285117770968';
+
+    const message =
+`Halo Wolfy Studio, saya mau order Jasa Joki MLBB.
+
+Nama: ${name}
+Kontak: ${contact}
+Paket: ${pkg}
+Rank Saat Ini: ${mapType}
+Target Rank & Detail Akun: ${details}`;
+
+    const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
+
+    document.getElementById('formCard').style.display = 'none';
+    const successCard = document.getElementById('successCard');
+    successCard.style.display = 'block';
+
+    document.getElementById('summaryBox').innerHTML = `
+      <div><b>Nama:</b> ${name}</div>
+      <div><b>Kontak:</b> ${contact}</div>
+      <div><b>Paket:</b> ${pkg}</div>
+      <div><b>Rank Saat Ini:</b> ${mapType}</div>
+      <div><b>Detail:</b> ${details}</div>
+    `;
+
+    window.scrollTo({top: 0, behavior:'smooth'});
+
+    window.open(waUrl, '_blank');
+  });
+</script>
+
+</body>
+</html>
