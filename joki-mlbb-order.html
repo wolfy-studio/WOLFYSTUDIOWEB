@@ -149,6 +149,7 @@
     width:52px; height:52px; margin:0 auto 14px;
   }
   .price-rank svg{ width:100%; height:100%; }
+  .price-rank img{ width:100%; height:100%; object-fit:contain; display:block; }
   .price-name{ font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--parchment); min-height:30px; }
   .price-amount{
     font-family:'Cinzel', serif; font-weight:700; font-size:24px; margin-top:10px;
@@ -321,41 +322,46 @@
       <div class="section-desc">Harga dihitung per bintang sesuai rank saat ini. Semakin tinggi rank, semakin tinggi tarifnya.</div>
     </div>
 
+    <!-- Icon tiap rank diambil dari file terpisah di folder icons/
+         Mau ganti gambar? Tinggal timpa file dengan nama yang sama
+         (epic.svg, legend.svg, mythic.svg, mythic-honor.svg,
+         mythic-glory.svg, mythic-immortal.svg) — ukuran ideal 52x52px.
+         Boleh SVG atau PNG, cukup samakan nama & ekstensi filenya. -->
     <div class="price-grid">
       <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="#9ac1b0" stroke-width="1.6"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7"/><path d="M12 12v10"/></svg></div>
-        <div class="price-name">Warrior – Grandmaster</div>
-        <div class="price-amount">Rp3K</div>
-        <div class="price-unit">Per Bintang</div>
-      </div>
-      <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="#7fd0d6" stroke-width="1.6"><path d="M12 2 4 6v6c0 5 3.4 9 8 10 4.6-1 8-5 8-10V6z"/></svg></div>
+        <div class="price-rank"><img src="icons/epic.svg" alt="Icon Epic"></div>
         <div class="price-name">Epic</div>
         <div class="price-amount">Rp5K</div>
         <div class="price-unit">Per Bintang</div>
       </div>
       <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><path d="M12 3 3 9l9 5 9-5-9-6Z"/><path d="M3 9v6l9 6 9-6V9"/></svg></div>
+        <div class="price-rank"><img src="icons/legend.svg" alt="Icon Legend"></div>
         <div class="price-name">Legend</div>
         <div class="price-amount">Rp7K</div>
         <div class="price-unit">Per Bintang</div>
       </div>
       <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><circle cx="12" cy="11" r="2.6"/></svg></div>
+        <div class="price-rank"><img src="icons/mythic.svg" alt="Icon Mythic"></div>
         <div class="price-name">Mythic</div>
         <div class="price-amount">Rp9K</div>
         <div class="price-unit">Per Bintang</div>
       </div>
       <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><path d="M9 11h6M12 8v6"/></svg></div>
+        <div class="price-rank"><img src="icons/mythic-honor.svg" alt="Icon Mythic Honor"></div>
         <div class="price-name">Mythic Honor</div>
         <div class="price-amount">Rp12K</div>
         <div class="price-unit">Per Bintang</div>
       </div>
       <div class="price-card">
-        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><path d="m9 11 2 2 4-4"/></svg></div>
+        <div class="price-rank"><img src="icons/mythic-glory.svg" alt="Icon Mythic Glory"></div>
         <div class="price-name">Mythic Glory</div>
         <div class="price-amount">Rp15K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><img src="icons/mythic-immortal.svg" alt="Icon Mythic Immortal"></div>
+        <div class="price-name">Mythic Immortal</div>
+        <div class="price-amount">Rp18K</div>
         <div class="price-unit">Per Bintang</div>
       </div>
     </div>
@@ -392,12 +398,12 @@
             <label>Paket Jasa <span class="req">*</span></label>
             <select required>
               <option value="" selected disabled>Pilih paket jasa</option>
-              <option>Warrior – Grandmaster (Rp3K/bintang)</option>
               <option>Epic (Rp5K/bintang)</option>
               <option>Legend (Rp7K/bintang)</option>
               <option>Mythic (Rp9K/bintang)</option>
               <option>Mythic Honor (Rp12K/bintang)</option>
               <option>Mythic Glory (Rp15K/bintang)</option>
+              <option>Mythic Immortal (Rp18K/bintang)</option>
             </select>
           </div>
         </div>
@@ -415,6 +421,7 @@
             <option>Mythic</option>
             <option>Mythic Honor</option>
             <option>Mythic Glory</option>
+            <option>Mythic Immortal</option>
           </select>
         </div>
 
