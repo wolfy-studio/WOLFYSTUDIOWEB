@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WOLFY STUDIO</title>
+<title>Wolfy Studio — Build. Create. Dominate.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -14,388 +14,271 @@
     --gold:#e6a53c;
     --gold-bright:#ffc36b;
     --text:#e8e6e2;
-    --muted:#7c7d82;
-    --muted-2:#4d4e52;
-    --ok:#5fd68a;
-    --locked:#3a3b3f;
+    --muted:#9a9ba0;
+    --muted-2:#5b5c60;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{height:100%;}
   body{
     background:
-      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(230,165,60,0.10), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(230,165,60,0.12), transparent 60%),
       repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
       repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
       var(--bg);
     color:var(--text);
     font-family:'Rajdhani', sans-serif;
     min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:32px 20px;
+    padding:56px 20px 40px;
   }
 
-  .card{
-    width:100%;
-    max-width:560px;
-    background:linear-gradient(180deg, #16171a, #101113);
-    border:1px solid var(--panel-edge);
-    border-radius:18px;
-    padding:44px 40px 40px;
-    position:relative;
-    overflow:hidden;
-    box-shadow:0 40px 80px -30px rgba(0,0,0,0.7);
-  }
-  .card::before{
-    content:'';
-    position:absolute;
-    top:0; left:0; right:0;
-    height:2px;
-    background:linear-gradient(90deg, transparent, var(--gold-bright), transparent);
-    opacity:0.85;
-  }
-  .card::after{
-    content:'';
-    position:absolute;
-    inset:-1px;
-    border-radius:18px;
-    padding:1px;
-    background:conic-gradient(from var(--angle,0deg), transparent 0 60%, rgba(230,165,60,0.35), transparent 75%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-    animation:spin 6s linear infinite;
-    pointer-events:none;
-  }
-  @property --angle{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
-  @keyframes spin{ to{ --angle:360deg; } }
+  .wrap{ max-width:620px; margin:0 auto; position:relative; }
 
+  /* decorative side shards */
+  .shard{ position:absolute; top:-10px; width:120px; height:340px; opacity:0.5; pointer-events:none; }
+  .shard.left{ left:-90px; background:linear-gradient(160deg,#1b1c1f,transparent 70%); clip-path:polygon(0 0,100% 10%,70% 100%,0 90%); }
+  .shard.right{ right:-90px; background:linear-gradient(200deg,#1b1c1f,transparent 70%); clip-path:polygon(100% 0,0 10%,30% 100%,100% 90%); }
+
+  .emblem-wrap{ display:flex; justify-content:center; margin-bottom:18px; }
   .emblem{
-    width:76px; height:76px;
-    margin:0 auto 22px;
-    border-radius:16px;
-    background:linear-gradient(160deg,#2a2b2f,#0e0f11);
-    border:1px solid #2f3034;
+    width:170px; height:170px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 30%, #232529, #0b0c0e 75%);
+    border:2px solid var(--gold);
+    box-shadow:0 0 0 1px rgba(230,165,60,0.15), 0 0 40px -8px rgba(230,165,60,0.35), 0 25px 50px -20px rgba(0,0,0,0.8);
     display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 0 1px rgba(230,165,60,0.08), 0 18px 30px -12px rgba(0,0,0,0.6);
     overflow:hidden;
   }
-  .emblem svg{ width:36px; height:36px; }
   .emblem img{ width:100%; height:100%; object-fit:cover; }
 
   h1{
     font-family:'Chakra Petch', sans-serif;
     font-weight:700;
     text-align:center;
-    font-size:26px;
-    letter-spacing:2px;
+    font-size:44px;
+    letter-spacing:4px;
     text-transform:uppercase;
-    background:linear-gradient(180deg, #fff, var(--gold-bright));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    color:#f4f2ee;
+    text-shadow:0 2px 12px rgba(0,0,0,0.6);
   }
-  .subtitle{
+  .tagline{
     text-align:center;
-    color:var(--muted);
-    font-size:15px;
-    margin-top:8px;
-    letter-spacing:0.3px;
-  }
-  .badge{
-    display:block;
-    width:fit-content;
-    margin:16px auto 30px;
+    color:var(--gold);
     font-family:'Chakra Petch', sans-serif;
-    font-size:11px;
+    font-size:12.5px;
     font-weight:600;
-    letter-spacing:1.5px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    margin-top:8px;
+    margin-bottom:36px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, #15161a, #101113);
+    border:1px solid var(--panel-edge);
+    border-radius:16px;
+    padding:18px 20px;
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(230,165,60,0.5), transparent);
+  }
+
+  .icon{
+    flex:0 0 auto;
+    width:64px; height:64px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.02);
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon svg{ width:30px; height:30px; }
+
+  .card-body{ flex:1; min-width:0; }
+  .card-title{
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    letter-spacing:0.6px;
+    text-transform:uppercase;
+    color:#f4f2ee;
+  }
+  .card-desc{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.45;
+    margin-top:5px;
+  }
+
+  .cta{
+    flex:0 0 auto;
+    font-family:'Chakra Petch', sans-serif;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:1.4px;
     text-transform:uppercase;
     color:var(--gold-bright);
-    background:rgba(230,165,60,0.10);
-    border:1px solid rgba(230,165,60,0.35);
-    padding:6px 14px;
-    border-radius:999px;
-  }
-
-  .step{
-    display:flex;
-    gap:16px;
-    padding:20px 0;
-    transition:opacity .35s ease;
-  }
-  .step + .step{ border-top:1px solid #1e1f22; }
-  .step.disabled{ opacity:0.4; }
-
-  .num{
-    flex:0 0 auto;
-    width:30px; height:30px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Chakra Petch', sans-serif;
-    font-size:13px; font-weight:700;
-    background:var(--locked);
-    color:#d9d9d9;
-    transition:all .3s ease;
-  }
-  .step.active .num{
-    background:linear-gradient(160deg, var(--gold-bright), var(--gold));
-    color:#1a1200;
-    box-shadow:0 0 0 4px rgba(230,165,60,0.15);
-  }
-  .step.done .num{
-    background:var(--ok);
-    color:#062012;
-  }
-
-  .step-body{ flex:1; }
-  .step-title{
-    font-family:'Chakra Petch', sans-serif;
-    font-weight:600;
-    font-size:16px;
-    letter-spacing:0.4px;
-  }
-  .step-desc{
-    color:var(--muted);
-    font-size:14.5px;
-    margin-top:4px;
-    line-height:1.5;
-  }
-
-  .actions{ display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
-  button{
-    font-family:'Rajdhani', sans-serif;
-    font-weight:600;
-    font-size:14.5px;
-    letter-spacing:0.3px;
-    padding:11px 20px;
-    border-radius:9px;
-    border:1px solid transparent;
-    cursor:pointer;
-    transition:transform .15s ease, filter .15s ease, background .2s ease;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-  }
-  button:active{ transform:scale(0.97); }
-  button:disabled{ cursor:not-allowed; opacity:0.5; }
-
-  .btn-primary{
-    background:linear-gradient(160deg, #ff3b3b, #d81f1f);
-    color:#fff;
-  }
-  .btn-primary:hover{ filter:brightness(1.08); }
-
-  .btn-ghost{
-    background:#1c1d20;
-    border-color:#2c2d31;
-    color:var(--text);
-  }
-  .btn-ghost:hover{ background:#232427; }
-  .btn-ghost.confirmed{
-    background:rgba(95,214,138,0.12);
-    border-color:rgba(95,214,138,0.5);
-    color:var(--ok);
-  }
-
-  .downloads{
-    margin-top:14px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .dl-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:#17181b;
-    border:1px solid #26272b;
-    border-radius:10px;
-    padding:13px 16px;
-    transition:border-color .2s ease, transform .15s ease;
-  }
-  .dl-item:hover{ border-color:rgba(230,165,60,0.4); transform:translateY(-1px); }
-  .dl-name{ font-size:15px; font-weight:600; }
-  .dl-meta{ font-size:12.5px; color:var(--muted); margin-top:2px; }
-  .dl-get{
-    font-family:'Chakra Petch', sans-serif;
-    font-size:12px; font-weight:600; letter-spacing:1px;
-    text-transform:uppercase;
-    color:#1a1200;
-    background:linear-gradient(160deg, var(--gold-bright), var(--gold));
-    padding:8px 14px;
-    border-radius:7px;
+    background:rgba(230,165,60,0.08);
+    border:1px solid rgba(230,165,60,0.55);
+    padding:10px 16px;
+    border-radius:8px;
     text-decoration:none;
     white-space:nowrap;
-  }
-
-  .locked-note{
-    font-size:13px;
-    color:var(--muted-2);
-    margin-top:6px;
-    display:flex;
+    display:inline-flex;
     align-items:center;
     gap:6px;
+    transition:background .2s ease, transform .15s ease, color .2s ease;
   }
+  .cta:hover{
+    background:linear-gradient(160deg, var(--gold-bright), var(--gold));
+    color:#1a1200;
+    transform:translateY(-1px);
+  }
+  .cta:active{ transform:scale(0.97); }
+  .cta svg{ width:12px; height:12px; }
 
-  .code-box{
+  footer{
+    margin-top:30px;
     display:flex;
-    gap:10px;
-    margin-top:16px;
+    justify-content:center;
+    gap:28px;
     flex-wrap:wrap;
+    padding:22px 10px 0;
+    border-top:1px solid #1c1d20;
   }
-  .code-input{
-    flex:1;
-    min-width:160px;
-    background:#17181b;
-    border:1px solid #2c2d31;
-    border-radius:9px;
-    padding:11px 14px;
-    color:var(--text);
-    font-family:'Rajdhani', sans-serif;
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:1px;
-    outline:none;
-    transition:border-color .2s ease;
+  .trust{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--muted-2);
+    font-size:12px;
+    letter-spacing:0.6px;
+    text-transform:uppercase;
+    font-family:'Chakra Petch', sans-serif;
+    font-weight:500;
   }
-  .code-input::placeholder{ color:var(--muted); font-weight:500; letter-spacing:0.3px; }
-  .code-input:focus{ border-color:rgba(230,165,60,0.5); }
-  .code-input.error{ border-color:#ff5b5b; animation:shake .3s ease; }
-  @keyframes shake{
-    25%{ transform:translateX(-4px); }
-    75%{ transform:translateX(4px); }
-  }
-  .code-error{
-    color:#ff8080;
-    font-size:13px;
-    margin-top:8px;
-    display:none;
-  }
+  .trust svg{ width:15px; height:15px; opacity:0.8; }
 
-  @media (prefers-reduced-motion: reduce){
-    .card::after{ animation:none; }
-  }
   @media (max-width:480px){
-    .card{ padding:32px 22px 30px; }
-    h1{ font-size:21px; letter-spacing:1px; }
+    h1{ font-size:32px; letter-spacing:2px; }
+    .tagline{ letter-spacing:3px; }
+    .emblem{ width:120px; height:120px; }
+    .emblem svg{ width:76px; height:76px; }
+    .card{ flex-wrap:wrap; }
+    .cta{ margin-left:82px; }
   }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="emblem">
-    <img src="logo.png" alt="Wolfy Studio">
-  </div>
+<div class="wrap">
+  <div class="shard left"></div>
+  <div class="shard right"></div>
 
-  <h1 id="siteTitle">Nama Channel Free Gate</h1>
-  <p class="subtitle" id="siteSubtitle">FREE MODELS/ASSET ROBLOX &amp; Assets</p>
-  <span class="badge">FOLLOWERS ONLY</span>
-
-  <!-- STEP 1 -->
-  <div class="step active" id="step1">
-    <div class="num">1</div>
-    <div class="step-body">
-      <div class="step-title">Follow TikTok <span id="channelName">Nama Channel</span></div>
-      <div class="step-desc">Follow TikTok kami untuk membuka semua link di bawah.</div>
-      <div class="actions">
-        <button class="btn-primary" id="subscribeBtn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8c-1-1.1-1.6-2.5-1.6-4.1h-3.1v14.5c0 1.6-1.3 2.9-2.9 2.9s-2.9-1.3-2.9-2.9 1.3-2.9 2.9-2.9c.3 0 .6 0 .9.1V10.2c-.3 0-.6-.1-.9-.1-3.4 0-6.1 2.7-6.1 6.1S6.5 22.3 9.9 22.3s6.1-2.7 6.1-6.1V8.6c1.3.9 2.9 1.5 4.6 1.5V7c-1.4 0-2.7-.5-3.6-1.3-.1 0-.3-.1-.4 0z"/></svg>
-          Follow TikTok
-        </button>
-      </div>
-      <div class="code-box">
-        <input type="text" class="code-input" id="codeInput" placeholder="Masukkan kode akses dari bio/caption TikTok">
-        <button class="btn-ghost" id="confirmBtn">Buka Akses</button>
-      </div>
-      <div class="code-error" id="codeError">Kode salah, cek lagi bio/caption TikTok kami ya.</div>
+  <div class="emblem-wrap">
+    <div class="emblem">
+      <img src="logo.png" alt="Wolfy Studio">
     </div>
   </div>
 
-  <!-- STEP 2 -->
-  <div class="step disabled" id="step2">
-    <div class="num">2</div>
-    <div class="step-body">
-      <div class="step-title">Akses Link</div>
-      <div class="step-desc" id="step2desc">Selesaikan langkah 1 untuk membuka semua tool.</div>
+  <h1>Wolfy Studio</h1>
+  <p class="tagline">Build &bull; Create &bull; Dominate</p>
 
-      <div class="locked-note" id="lockedNote">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        Terkunci sampai kode akses benar
-      </div>
-
-      <div class="downloads" id="downloadsList" style="display:none;">
-        <div class="dl-item">
-          <div>
-            <div class="dl-name">Asset Pack Gratis</div>
-            <div class="dl-meta">Join Discord</div>
-          </div>
-          <a href="https://discord.gg/2rkRb9ap9G" target="_blank" rel="noopener" class="dl-get">Visit</a>
-        </div>
-        <div class="dl-item">
-          <div>
-            <div class="dl-name">JASA BUILDMAP</div>
-            <div class="dl-meta">Join Discord</div>
-          </div>
-          <a href="https://discord.gg/RD43SCQtMQ" target="_blank" rel="noopener" class="dl-get">Visit</a>
-        </div>
-      </div>
+  <!-- Card 1 -->
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e6a53c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3" transform="rotate(45 12 12)"/></svg>
     </div>
+    <div class="card-body">
+      <div class="card-title">Jasa Pembuatan Map Roblox</div>
+      <div class="card-desc">Map custom berkualitas sesuai kebutuhanmu. Mulai dari city, roleplay, horror, sampai map simulator.</div>
+    </div>
+    <a href="#" class="cta">Pesan Sekarang
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
   </div>
+
+  <!-- Card 2 -->
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e6a53c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l12 16M18 4L6 20"/></svg>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Jasa Joki MLBB</div>
+      <div class="card-desc">Joki rank aman, cepat, dan terpercaya. Proses dikerjakan oleh player berpengalaman.</div>
+    </div>
+    <a href="#" class="cta">Lihat Paket
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e6a53c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Free Asset Roblox</div>
+      <div class="card-desc">Kumpulan asset gratis berkualitas untuk kebutuhan map kamu.</div>
+    </div>
+    <a href="free-gate.html" class="cta">Download
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e6a53c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="9" cy="10" r="1.2" fill="#e6a53c" stroke="none"/><circle cx="15" cy="10" r="1.2" fill="#e6a53c" stroke="none"/><path d="M8 15c1.2 1.2 2.6 1.2 4 1.2s2.8 0 4-1.2"/></svg>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Join Discord</div>
+      <div class="card-desc">Gabung ke server Discord kami untuk update, event, dan komunitas kreator!</div>
+    </div>
+    <a href="https://discord.gg/2rkRb9ap9G" target="_blank" rel="noopener" class="cta">Gabung
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="card">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#e6a53c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5.8c-.9-1-1.5-2.3-1.5-3.8h-2.8v13.4c0 1.5-1.2 2.7-2.7 2.7S6.3 16.9 6.3 15.4 7.5 12.7 9 12.7c.3 0 .6 0 .8.1V9.9c-.3 0-.5 0-.8 0-3.1 0-5.6 2.5-5.6 5.6S6 21 9 21s5.6-2.5 5.6-5.6V8.1c1.2.8 2.6 1.3 4.1 1.3V6.6c-1.2 0-2.4-.4-3.3-1.2-.1-.2-.3-.3-.4-.4z"/></svg>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Follow TikTok</div>
+      <div class="card-desc">Follow TikTok kami untuk konten menarik, update project, dan showcase map!</div>
+    </div>
+    <a href="https://www.tiktok.com/@wolfy2315?lang=id-ID" target="_blank" rel="noopener" class="cta">Follow
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/></svg>
+      Aman &amp; Terpercaya
+    </div>
+    <div class="trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 3L4 14h6l-1 7 9-11h-6z"/></svg>
+      Proses Cepat
+    </div>
+    <div class="trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M8 13l-2 8 6-3 6 3-2-8"/></svg>
+      Kualitas Premium
+    </div>
+    <div class="trust">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0118 0M4 15v3a2 2 0 002 2h1v-6H6a2 2 0 00-2 2zM20 15v3a2 2 0 01-2 2h-1v-6h1a2 2 0 012 2z"/></svg>
+      Fast Respon
+    </div>
+  </footer>
 </div>
-
-<script>
-  // ====== KUSTOMISASI DI SINI ======
-  const CHANNEL_NAME = "WOLFY STUDIO";
-  const SUBSCRIBE_URL = "https://www.tiktok.com/@wolfy2315?lang=id-ID";
-  const ACCESS_CODE = "FOLLOW DULU YA"; // ganti ini kapan saja, lalu update juga di bio/caption TikTok kamu
-  // ==================================
-
-  document.getElementById('channelName').textContent = CHANNEL_NAME;
-  document.getElementById('siteTitle').textContent = CHANNEL_NAME.toUpperCase();
-
-  document.getElementById('subscribeBtn').addEventListener('click', () => {
-    window.open(SUBSCRIBE_URL, '_blank');
-  });
-
-  function unlockAccess(){
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    step1.classList.remove('active');
-    step1.classList.add('done');
-    step1.querySelector('.num').textContent = '✓';
-
-    step2.classList.remove('disabled');
-    step2.classList.add('active');
-    step2.querySelector('.num').textContent = '2';
-    document.getElementById('step2desc').textContent = 'Semua Link terbuka! Pilih dan kunjungi di bawah.';
-    document.getElementById('lockedNote').style.display = 'none';
-    document.getElementById('downloadsList').style.display = 'flex';
-  }
-
-  function checkCode(){
-    const input = document.getElementById('codeInput');
-    const errorMsg = document.getElementById('codeError');
-    const entered = input.value.trim().toUpperCase();
-
-    if(entered === ACCESS_CODE.toUpperCase()){
-      errorMsg.style.display = 'none';
-      input.classList.remove('error');
-      unlockAccess();
-    } else {
-      errorMsg.style.display = 'block';
-      input.classList.add('error');
-      setTimeout(() => input.classList.remove('error'), 300);
-    }
-  }
-
-  document.getElementById('confirmBtn').addEventListener('click', checkCode);
-  document.getElementById('codeInput').addEventListener('keydown', (e) => {
-    if(e.key === 'Enter') checkCode();
-  });
-</script>
 
 </body>
 </html>
