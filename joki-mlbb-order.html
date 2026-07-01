@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archive Store — Jasa Joki MLBB</title>
+<title>Archive Store — Joki Mobile Legends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -11,6 +11,7 @@
     --void:#0a0906;
     --charcoal:#15130f;
     --panel:#1b1812;
+    --panel-soft:#211d15;
     --hairline:#332c1f;
     --gold:#e8b04b;
     --gold-bright:#ffd479;
@@ -18,6 +19,7 @@
     --parchment:#e9e2d2;
     --ash:#9a927e;
     --crimson:#c23a3a;
+    --emerald:#7bc38a;
     --shadow: 0 20px 60px rgba(0,0,0,.55);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -30,192 +32,199 @@
     color:var(--parchment);
     font-family:'Manrope', sans-serif;
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:56px 16px 40px;
   }
-  .frame{
-    width:100%;
-    max-width:600px;
-  }
+  a{color:inherit;}
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
 
-  /* ===== CREST ===== */
-  .crest-wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:34px;}
-  .crest{
-    width:104px; height:104px; position:relative;
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:22px;
+  /* ===== NAV ===== */
+  nav{
+    border-bottom:1px solid var(--hairline);
+    background:rgba(10,9,6,.75);
+    backdrop-filter:blur(10px);
+    position:sticky; top:0; z-index:20;
   }
-  .crest svg{ width:100%; height:100%; filter: drop-shadow(0 6px 18px rgba(232,176,75,.25)); }
-  .brand-name{
-    font-family:'Cinzel', serif;
-    font-weight:700;
-    font-size:clamp(30px,7vw,40px);
-    letter-spacing:.09em;
-    background:linear-gradient(180deg, var(--gold-bright), var(--gold) 55%, var(--gold-dim));
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px; max-width:1080px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-crest{ width:34px; height:34px; flex:none; }
+  .brand-crest svg{ width:100%; height:100%; }
+  .brand-text{
+    font-family:'Cinzel', serif; font-weight:700; font-size:16px; letter-spacing:.06em;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold-dim));
     -webkit-background-clip:text; background-clip:text; color:transparent;
-    line-height:1.1;
   }
-  .brand-sub{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    color:var(--ash);
-    font-size:14px;
-    margin-top:8px;
+  .nav-links{ display:flex; gap:30px; list-style:none; }
+  .nav-links a{
+    font-size:13.5px; color:var(--ash); text-decoration:none; font-weight:600;
+    letter-spacing:.02em; transition:color .15s ease;
   }
-  .oath{
-    margin-top:18px;
+  .nav-links a:hover{ color:var(--gold-bright); }
+  .nav-cta{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid var(--gold-dim); color:var(--gold);
+    padding:9px 18px; border-radius:999px; font-size:13px; font-weight:700;
+    text-decoration:none; transition:background .15s ease, color .15s ease;
+  }
+  .nav-cta:hover{ background:var(--gold); color:var(--void); }
+  .nav-toggle{ display:none; }
+
+  /* ===== HERO ===== */
+  .hero{ padding:64px 20px 40px; text-align:center; }
+  .eyebrow{
+    display:inline-block;
     border:1px solid var(--gold-dim);
     border-radius:999px;
-    padding:8px 22px;
+    padding:7px 20px;
     font-size:11px;
-    letter-spacing:.22em;
+    letter-spacing:.24em;
     text-transform:uppercase;
     color:var(--gold);
     background:rgba(232,176,75,.05);
+    margin-bottom:22px;
   }
-  .oath span{ color:var(--gold-dim); margin:0 8px;}
+  h1{
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    font-size:clamp(32px,6vw,52px);
+    letter-spacing:.02em;
+    line-height:1.15;
+    margin-bottom:18px;
+  }
+  h1 .accent{
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold) 55%, var(--gold-dim));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{
+    max-width:560px; margin:0 auto;
+    color:var(--ash); font-size:15.5px; line-height:1.7;
+  }
 
-  /* ===== SECTION LABEL ===== */
-  .rank{
-    display:flex; align-items:center; gap:12px;
-    margin:38px 0 16px;
+  .badges{
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+    margin-top:32px;
   }
-  .rank-badge{
-    width:28px; height:28px; flex:none;
-    border-radius:50%;
-    background:linear-gradient(160deg, var(--gold-bright), var(--gold-dim));
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Cinzel', serif; font-weight:700; font-size:12px; color:var(--void);
+  .badge{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--hairline);
+    background:var(--panel);
+    padding:12px 18px;
+    border-radius:12px;
+    text-align:left;
   }
-  .rank-title{ font-family:'Cinzel', serif; font-size:19px; letter-spacing:.03em; color:var(--parchment); font-weight:600;}
-  .rank-desc{ color:var(--ash); font-size:13.5px; margin-top:2px; line-height:1.5;}
-  .rank-head{ flex:1; }
+  .badge svg{ width:20px; height:20px; color:var(--gold); flex:none; }
+  .badge-title{ font-size:12.5px; font-weight:700; letter-spacing:.02em; }
+  .badge-desc{ font-size:11px; color:var(--ash); margin-top:1px; }
 
-  /* ===== FOLLOW CARD ===== */
-  .card{
+  /* ===== SECTION HEADS ===== */
+  .section{ padding:56px 20px; }
+  .section-head{ text-align:center; margin-bottom:32px; }
+  .section-eyebrow{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold-dim); font-size:13px; margin-bottom:8px;
+  }
+  .section-title{
+    font-family:'Cinzel', serif; font-weight:700; font-size:26px; letter-spacing:.02em;
+  }
+  .section-desc{ color:var(--ash); font-size:14px; margin-top:8px; max-width:480px; margin-left:auto; margin-right:auto; }
+
+  /* ===== PRICE GRID ===== */
+  .price-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  .price-card{
     background:linear-gradient(180deg, var(--panel), var(--charcoal));
     border:1px solid var(--hairline);
     border-radius:16px;
-    padding:22px;
+    padding:22px 18px;
+    text-align:center;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .price-card:hover{ border-color:var(--gold-dim); transform:translateY(-3px); }
+  .price-rank{
+    width:52px; height:52px; margin:0 auto 14px;
+  }
+  .price-rank svg{ width:100%; height:100%; }
+  .price-name{ font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--parchment); min-height:30px; }
+  .price-amount{
+    font-family:'Cinzel', serif; font-weight:700; font-size:24px; margin-top:10px;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold-dim));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .price-unit{ font-size:10.5px; color:var(--ash); letter-spacing:.1em; text-transform:uppercase; margin-top:2px; }
+
+  /* ===== FORM ===== */
+  .form-card{
+    background:linear-gradient(180deg, var(--panel), var(--charcoal));
+    border:1px solid var(--hairline);
+    border-radius:18px;
+    padding:32px;
     box-shadow:var(--shadow);
   }
-  .tiktok-btn{
-    width:100%; margin-top:16px;
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:linear-gradient(180deg,#e23f4f,#b8283a);
-    border:none; border-radius:10px;
-    color:#fff; font-weight:700; font-size:15px;
-    padding:14px; cursor:pointer;
-    font-family:'Manrope',sans-serif;
-    box-shadow:0 8px 22px rgba(194,58,58,.28);
-    transition:transform .15s ease, box-shadow .15s ease;
-    text-decoration:none;
-  }
-  .tiktok-btn:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(194,58,58,.4);}
-  .tiktok-btn:active{ transform:translateY(0); }
+  .form-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .form-head svg{ width:22px; height:22px; color:var(--gold); }
+  .form-head-title{ font-family:'Cinzel', serif; font-weight:600; font-size:18px; }
+  .form-sub{ color:var(--ash); font-size:13px; margin-bottom:26px; margin-left:34px; }
 
-  .unlock-row{
-    display:flex; gap:10px; margin-top:16px;
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field{ margin-bottom:18px; }
+  .field label{
+    display:block; font-size:12.5px; font-weight:700; letter-spacing:.02em; margin-bottom:8px; color:var(--parchment);
   }
-  .unlock-row input{
-    flex:1; min-width:0;
+  .field label .req{ color:var(--crimson); }
+  .field label .opt{ color:var(--ash); font-weight:500; text-transform:none; letter-spacing:0; }
+  .field input, .field select, .field textarea{
+    width:100%;
     background:var(--void);
     border:1px solid var(--hairline);
     border-radius:10px;
-    padding:0 14px;
-    height:48px;
+    padding:12px 14px;
     color:var(--parchment);
     font-family:'Manrope',sans-serif;
     font-size:14px;
     outline:none;
+    transition:border-color .15s ease;
   }
-  .unlock-row input::placeholder{ color:#615a48; }
-  .unlock-row input:focus{ border-color:var(--gold-dim); }
-  .unlock-btn{
-    flex:none;
-    background:transparent;
-    border:1px solid var(--gold-dim);
-    color:var(--gold);
-    border-radius:10px;
-    padding:0 20px;
-    font-family:'Manrope',sans-serif;
-    font-weight:700;
-    font-size:14px;
-    cursor:pointer;
-    transition:background .15s ease, color .15s ease;
+  .field textarea{ resize:vertical; min-height:80px; }
+  .field input::placeholder, .field textarea::placeholder{ color:#615a48; }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--gold-dim); }
+  .field-hint{ font-size:11px; color:var(--ash); margin-top:6px; }
+  .field select{ appearance:none; -webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a6a2f' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
   }
-  .unlock-btn:hover{ background:var(--gold); color:var(--void); }
 
-  .hint, .error{
-    font-size:12.5px;
-    margin-top:10px;
-    min-height:16px;
-  }
-  .hint{ color:var(--ash); }
-  .error{ color:var(--crimson); display:none; }
-  .success{ color:#7bc38a; display:none; }
-
-  /* ===== LINK LIST ===== */
-  .links{ display:flex; flex-direction:column; gap:12px; position:relative; }
-  .links.locked{ filter:blur(5px); pointer-events:none; user-select:none; opacity:.55; }
-  .lock-overlay{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    flex-direction:column; gap:8px;
-    text-align:center;
-    color:var(--ash);
-    font-size:13px;
-    z-index:2;
-  }
-  .links-wrap{ position:relative; min-height:60px; }
-
-  .link-card{
-    display:flex; align-items:center; gap:16px;
-    background:var(--panel);
-    border:1px solid var(--hairline);
-    border-radius:14px;
-    padding:16px 18px;
-    transition:border-color .15s ease, transform .15s ease;
-  }
-  .link-card:hover{ border-color:var(--gold-dim); transform:translateY(-1px); }
-  .link-icon{
-    width:44px; height:44px; flex:none;
-    border-radius:11px;
-    background:radial-gradient(circle at 30% 20%, rgba(232,176,75,.22), rgba(232,176,75,.05));
-    border:1px solid var(--hairline);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--gold);
-  }
-  .link-icon svg{ width:20px; height:20px; }
-  .link-body{ flex:1; min-width:0; }
-  .link-title{ font-weight:700; font-size:14.5px; letter-spacing:.02em; color:var(--parchment);}
-  .link-desc{ font-size:12.5px; color:var(--ash); margin-top:2px; line-height:1.4; }
-  .visit-btn{
-    flex:none;
+  .submit-btn{
+    width:100%; margin-top:6px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
     background:linear-gradient(180deg, var(--gold-bright), var(--gold));
-    color:var(--void);
-    font-weight:800;
-    font-size:12.5px;
-    letter-spacing:.05em;
-    padding:10px 16px;
-    border-radius:9px;
-    text-decoration:none;
-    white-space:nowrap;
-    transition:filter .15s ease;
+    border:none; border-radius:10px;
+    color:var(--void); font-weight:800; font-size:15px;
+    padding:15px; cursor:pointer;
+    font-family:'Manrope',sans-serif;
+    box-shadow:0 8px 22px rgba(232,176,75,.22);
+    transition:filter .15s ease, transform .15s ease;
   }
-  .visit-btn:hover{ filter:brightness(1.08); }
+  .submit-btn:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+  .submit-btn:active{ transform:translateY(0); }
+  .form-foot{
+    text-align:center; font-size:11.5px; color:var(--ash);
+    margin-top:14px; display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .form-foot svg{ width:13px; height:13px; color:var(--gold); }
 
-  /* ===== FOOTER TRUST ===== */
+  /* ===== TRUST FOOTER ===== */
   .trust{
-    margin-top:34px;
     border-top:1px solid var(--hairline);
-    padding-top:22px;
+    padding:36px 20px 48px;
     display:grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(4, 1fr);
     gap:16px;
+    max-width:1080px; margin:0 auto;
   }
   .trust-item{ display:flex; align-items:center; gap:10px; }
   .trust-icon{ color:var(--gold); flex:none; }
@@ -223,169 +232,238 @@
   .trust-title{ font-size:12px; font-weight:700; letter-spacing:.03em; color:var(--parchment); }
   .trust-desc{ font-size:11px; color:var(--ash); margin-top:1px; }
 
-  @media (max-width:420px){
-    .trust{ grid-template-columns:1fr; }
-    .visit-btn{ padding:9px 13px; font-size:11.5px; }
-    .link-desc{ display:none; }
+  footer{
+    border-top:1px solid var(--hairline);
+    text-align:center; padding:22px 20px; color:var(--ash); font-size:12px;
+  }
+
+  @media (max-width:760px){
+    .price-grid{ grid-template-columns:repeat(2, 1fr); }
+    .grid-2{ grid-template-columns:1fr; }
+    .trust{ grid-template-columns:repeat(2,1fr); }
+    .nav-links{ display:none; }
+  }
+  @media (max-width:460px){
+    .price-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
+    .price-card{ padding:16px 10px; }
+    .form-card{ padding:22px 16px; }
   }
 </style>
 </head>
 <body>
-<div class="frame">
 
-  <div class="crest-wrap">
-    <div class="crest">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffd479"/>
-            <stop offset="1" stop-color="#a67a2e"/>
-          </linearGradient>
-        </defs>
-        <path d="M50 8 L14 24 V50 C14 72 30 88 50 94 C70 88 86 72 86 50 V24 Z" fill="none" stroke="url(#g1)" stroke-width="2.5"/>
-        <path d="M8 40 C22 30 30 44 26 56 C20 50 12 48 8 40Z" fill="url(#g1)" opacity="0.85"/>
-        <path d="M92 40 C78 30 70 44 74 56 C80 50 88 48 92 40Z" fill="url(#g1)" opacity="0.85"/>
-        <path d="M50 30 L58 52 L50 46 L42 52 Z" fill="url(#g1)"/>
-        <path d="M50 18 L56 26 L50 24 L44 26 Z" fill="url(#g1)"/>
-        <text x="50" y="70" text-anchor="middle" font-family="Cinzel, serif" font-weight="700" font-size="15" fill="url(#g1)">A</text>
-      </svg>
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-crest">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="navg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffd479"/>
+              <stop offset="1" stop-color="#a67a2e"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 8 L14 24 V50 C14 72 30 88 50 94 C70 88 86 72 86 50 V24 Z" fill="none" stroke="url(#navg)" stroke-width="4"/>
+          <path d="M50 30 L58 52 L50 46 L42 52 Z" fill="url(#navg)"/>
+        </svg>
+      </div>
+      <span class="brand-text">ARCHIVE STORE</span>
     </div>
-    <div class="brand-name">ARCHIVE STORE</div>
-    <div class="brand-sub">Jasa Joki MLBB</div>
-    <div class="oath">AMAN <span>•</span> CEPAT <span>•</span> TERPERCAYA</div>
-  </div>
-
-  <!-- STEP 1: FOLLOW -->
-  <div class="rank">
-    <div class="rank-badge">1</div>
-    <div class="rank-head">
-      <div class="rank-title">Follow TikTok Archive Store</div>
-      <div class="rank-desc">Follow TikTok kami untuk melihat promo, testimoni & info terbaru.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <a class="tiktok-btn" href="https://www.tiktok.com/@archivestore" target="_blank" rel="noopener">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1.02-.98-1.6-2.35-1.6-3.82h-3.14v14.02c0 1.55-1.26 2.8-2.8 2.8a2.8 2.8 0 0 1 0-5.6c.26 0 .5.03.74.1V9.9a6.02 6.02 0 0 0-.74-.04A6 6 0 1 0 15 15.87V9.5a8.3 8.3 0 0 0 4.85 1.54V7.9c-1.16 0-2.28-.36-3.25-1.03z"/></svg>
-      Follow TikTok
+    <ul class="nav-links">
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#harga">Harga</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#order">Cara Order</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/6281234567890" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.14-1.34A10 10 0 1 0 12 2Zm0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-3.06.8.82-2.98-.2-.31A8.2 8.2 0 1 1 12 20.2Zm4.5-6.14c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.24-.63.8-.78.97-.14.16-.28.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.24-.02-.37.11-.5.11-.11.25-.28.37-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.8-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.5.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg>
+      Hubungi Kami
     </a>
-
-    <div class="unlock-row">
-      <input id="codeInput" type="text" placeholder="Masukkan kode akses dari bio/caption TikTok">
-      <button class="unlock-btn" onclick="checkCode()">Buka Akses</button>
-    </div>
-    <div class="hint" id="hintText">Kode ada di bio atau caption video TikTok kami.</div>
-    <div class="error" id="errorText">Kode salah, cek lagi bio/caption TikTok kami ya.</div>
   </div>
+</nav>
 
-  <!-- STEP 2: LINKS -->
-  <div class="rank">
-    <div class="rank-badge">2</div>
-    <div class="rank-head">
-      <div class="rank-title">Akses Link</div>
-      <div class="rank-desc">Semua link terbuka! Pilih dan kunjungi di bawah.</div>
+<section class="hero" id="beranda">
+  <div class="eyebrow">Jasa Joki Rank</div>
+  <h1>Joki <span class="accent">Mobile Legends</span></h1>
+  <p>Naik rank aman, cepat, dan terpercaya — dikerjakan oleh player berpengalaman. Pilih paket sesuai target, isi detail akun, dan tim kami akan menghubungimu untuk konfirmasi.</p>
+
+  <div class="badges">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+      <div>
+        <div class="badge-title">Aman &amp; Terpercaya</div>
+        <div class="badge-desc">Data akun dijamin aman</div>
+      </div>
     </div>
-  </div>
-
-  <div class="links-wrap">
-    <div class="lock-overlay" id="lockOverlay">
-      🔒 Masukkan kode akses di atas untuk membuka link
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+      <div>
+        <div class="badge-title">Proses Cepat</div>
+        <div class="badge-desc">Pengerjaan on time</div>
+      </div>
     </div>
-    <div class="links locked" id="linksList">
-
-      <div class="link-card">
-        <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
-        <div class="link-body">
-          <div class="link-title">Joki Rank MLBB</div>
-          <div class="link-desc">Naikkan rank kamu dengan aman & cepat oleh player berpengalaman.</div>
-        </div>
-        <a class="visit-btn" href="#" target="_blank" rel="noopener">VISIT</a>
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11a9 9 0 0 1 18 0v3a2 2 0 0 1-2 2h-1v-6h3"/><path d="M3 14v-3a9 9 0 0 1 1-4"/><path d="M7 11H4v3a2 2 0 0 0 2 2h1z"/></svg>
+      <div>
+        <div class="badge-title">Update Progress</div>
+        <div class="badge-desc">Laporan progres berkala</div>
       </div>
-
-      <div class="link-card">
-        <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <div class="link-body">
-          <div class="link-title">Joki Gendong (Winstreak)</div>
-          <div class="link-desc">Butuh win streak? Serahkan pada kami, aman & tanpa ganggu aktivitasmu.</div>
-        </div>
-        <a class="visit-btn" href="#" target="_blank" rel="noopener">VISIT</a>
-      </div>
-
-      <div class="link-card">
-        <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1-4.5A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
-        <div class="link-body">
-          <div class="link-title">Testimoni Customer</div>
-          <div class="link-desc">Lihat berbagai testimoni dari customer yang sudah puas dengan layanan kami.</div>
-        </div>
-        <a class="visit-btn" href="#" target="_blank" rel="noopener">VISIT</a>
-      </div>
-
-      <div class="link-card">
-        <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m2 9 4 2 4-6 4 6 4-6 4 6-2 9H4Z"/></svg></div>
-        <div class="link-body">
-          <div class="link-title">Harga & Paket Jasa</div>
-          <div class="link-desc">Pilih paket joki MLBB sesuai kebutuhanmu dengan harga terbaik.</div>
-        </div>
-        <a class="visit-btn" href="#" target="_blank" rel="noopener">VISIT</a>
-      </div>
-
-      <div class="link-card">
-        <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11a9 9 0 0 1 18 0v3a2 2 0 0 1-2 2h-1v-6h3"/><path d="M3 14v-3a9 9 0 0 1 1-4"/><path d="M7 11H4v3a2 2 0 0 0 2 2h1z"/></svg></div>
-        <div class="link-body">
-          <div class="link-title">Hubungi Admin</div>
-          <div class="link-desc">Butuh bantuan atau konsultasi? Chat admin kami sekarang.</div>
-        </div>
-        <a class="visit-btn" href="#" target="_blank" rel="noopener">VISIT</a>
-      </div>
-
     </div>
   </div>
+</section>
 
-  <!-- TRUST -->
-  <div class="trust">
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div><div class="trust-title">100% Aman</div><div class="trust-desc">Akun terjamin aman</div></div>
+<section class="section" id="harga">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Daftar Harga</div>
+      <div class="section-title">Tarif Per Bintang</div>
+      <div class="section-desc">Harga dihitung per bintang sesuai rank saat ini. Semakin tinggi rank, semakin tinggi tarifnya.</div>
     </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></div>
-      <div><div class="trust-title">Proses Cepat</div><div class="trust-desc">Pengerjaan on time</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3" opacity=".6"/></svg></div>
-      <div><div class="trust-title">Player Pro</div><div class="trust-desc">Dikerjakan oleh pro player</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-      <div><div class="trust-title">Privasi Terjaga</div><div class="trust-desc">Data & akun aman</div></div>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="#9ac1b0" stroke-width="1.6"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="M3 7v10l9 5 9-5V7"/><path d="M12 12v10"/></svg></div>
+        <div class="price-name">Warrior – Grandmaster</div>
+        <div class="price-amount">Rp3K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="#7fd0d6" stroke-width="1.6"><path d="M12 2 4 6v6c0 5 3.4 9 8 10 4.6-1 8-5 8-10V6z"/></svg></div>
+        <div class="price-name">Epic</div>
+        <div class="price-amount">Rp5K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6"><path d="M12 3 3 9l9 5 9-5-9-6Z"/><path d="M3 9v6l9 6 9-6V9"/></svg></div>
+        <div class="price-name">Legend</div>
+        <div class="price-amount">Rp7K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><circle cx="12" cy="11" r="2.6"/></svg></div>
+        <div class="price-name">Mythic</div>
+        <div class="price-amount">Rp9K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><path d="M9 11h6M12 8v6"/></svg></div>
+        <div class="price-name">Mythic Honor</div>
+        <div class="price-amount">Rp12K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
+      <div class="price-card">
+        <div class="price-rank"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.6"><path d="M12 2 4 7v5c0 6 3.6 9.7 8 10 4.4-.3 8-4 8-10V7Z"/><path d="m9 11 2 2 4-4"/></svg></div>
+        <div class="price-name">Mythic Glory</div>
+        <div class="price-amount">Rp15K</div>
+        <div class="price-unit">Per Bintang</div>
+      </div>
     </div>
   </div>
+</section>
 
+<section class="section" id="order">
+  <div class="wrap" style="max-width:640px;">
+    <div class="form-card">
+      <div class="form-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+        <div class="form-head-title">Form Pemesanan</div>
+      </div>
+      <div class="form-sub">Lengkapi data di bawah ini sesuai kebutuhan kamu.</div>
+
+      <form onsubmit="return false;">
+        <div class="grid-2">
+          <div class="field">
+            <label>Nama Lengkap <span class="req">*</span></label>
+            <input type="text" placeholder="Masukkan nama lengkap kamu" required>
+          </div>
+          <div class="field">
+            <label>ID Game <span class="req">*</span></label>
+            <input type="text" placeholder="Masukkan ID Game kamu (angka)" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>Username <span class="req">*</span></label>
+            <input type="text" placeholder="Masukkan username kamu" required>
+          </div>
+          <div class="field">
+            <label>Paket Jasa <span class="req">*</span></label>
+            <select required>
+              <option value="" selected disabled>Pilih paket jasa</option>
+              <option>Warrior – Grandmaster (Rp3K/bintang)</option>
+              <option>Epic (Rp5K/bintang)</option>
+              <option>Legend (Rp7K/bintang)</option>
+              <option>Mythic (Rp9K/bintang)</option>
+              <option>Mythic Honor (Rp12K/bintang)</option>
+              <option>Mythic Glory (Rp15K/bintang)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Target Rank <span class="req">*</span></label>
+          <select required>
+            <option value="" selected disabled>Pilih target rank</option>
+            <option>Warrior</option>
+            <option>Elite</option>
+            <option>Master</option>
+            <option>Grandmaster</option>
+            <option>Epic</option>
+            <option>Legend</option>
+            <option>Mythic</option>
+            <option>Mythic Honor</option>
+            <option>Mythic Glory</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Request Hero (Minimal 3) <span class="opt">(Opsional)</span></label>
+          <input type="text" placeholder="Contoh: Natan, Fanny, Ling">
+          <div class="field-hint">Opsional, boleh dikosongkan jika tidak ada request.</div>
+        </div>
+
+        <div class="field">
+          <label>Catatan Tambahan <span class="opt">(Opsional)</span></label>
+          <textarea placeholder="Tulis catatan tambahan jika ada (misal: jam main, hindari hero tertentu, dll)."></textarea>
+        </div>
+
+        <button class="submit-btn" type="submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21 23 12 2 3v7l15 2-15 2z"/></svg>
+          Kirim Pesanan
+        </button>
+        <div class="form-foot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          Data kamu aman bersama kami
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5.5 3.4 9.7 8 11 4.6-1.3 8-5.5 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+    <div><div class="trust-title">100% Aman</div><div class="trust-desc">Akun terjamin aman</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></div>
+    <div><div class="trust-title">Proses Cepat</div><div class="trust-desc">Pengerjaan on time</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3" opacity=".6"/></svg></div>
+    <div><div class="trust-title">Player Pro</div><div class="trust-desc">Dikerjakan oleh pro player</div></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <div><div class="trust-title">Privasi Terjaga</div><div class="trust-desc">Data &amp; akun aman</div></div>
+  </div>
 </div>
 
-<script>
-  // Ganti kode ini sesuai kode yang kamu bagikan di bio/caption TikTok
-  const ACCESS_CODE = "ARCHIVE10";
-
-  function checkCode(){
-    const input = document.getElementById('codeInput').value.trim().toUpperCase();
-    const err = document.getElementById('errorText');
-    const links = document.getElementById('linksList');
-    const overlay = document.getElementById('lockOverlay');
-
-    if(input === ACCESS_CODE){
-      links.classList.remove('locked');
-      overlay.style.display = 'none';
-      err.style.display = 'none';
-    } else {
-      err.style.display = 'block';
-    }
-  }
-
-  document.getElementById('codeInput').addEventListener('keydown', function(e){
-    if(e.key === 'Enter') checkCode();
-  });
-</script>
+<footer>
+  &copy; 2026 Archive Store — Jasa Joki MLBB. Semua hak dilindungi.
+</footer>
 
 </body>
 </html>
