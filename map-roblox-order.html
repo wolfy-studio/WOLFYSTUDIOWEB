@@ -11,6 +11,8 @@
     --bg:#08090b;
     --gold:#e6a53c;
     --gold-bright:#ffc36b;
+    --blue:#4ea3ff;
+    --purple:#a26bff;
     --text:#e8e6e2;
     --muted:#9a9ba0;
     --muted-2:#5b5c60;
@@ -22,6 +24,8 @@
   body{
     background:
       radial-gradient(ellipse 900px 500px at 50% 0%, rgba(230,165,60,0.12), transparent 60%),
+      radial-gradient(ellipse 500px 400px at 100% 5%, rgba(230,120,60,0.10), transparent 60%),
+      radial-gradient(ellipse 500px 400px at 0% 5%, rgba(78,163,255,0.08), transparent 60%),
       repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
       repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 48px),
       var(--bg);
@@ -29,9 +33,16 @@
     font-family:'Rajdhani', sans-serif;
     min-height:100vh;
     padding:48px 20px 56px;
+    position:relative;
+    overflow-x:hidden;
   }
 
-  .wrap{ max-width:640px; margin:0 auto; }
+  /* decorative skyline (left) + haunted silhouette (right), purely ambient */
+  .deco{ position:absolute; top:0; width:220px; height:280px; opacity:0.55; pointer-events:none; z-index:0; }
+  .deco-left{ left:0; }
+  .deco-right{ right:0; }
+
+  .wrap{ max-width:640px; margin:0 auto; position:relative; z-index:1; }
 
   .back{
     display:inline-flex; align-items:center; gap:6px;
@@ -41,7 +52,7 @@
   .back:hover{ color:var(--gold-bright); }
 
   .eyebrow{
-    display:block; width:fit-content; margin:0 auto 14px;
+    display:flex; align-items:center; gap:7px; width:fit-content; margin:0 auto 18px;
     font-family:'Chakra Petch', sans-serif;
     font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
     color:var(--gold-bright);
@@ -51,75 +62,109 @@
   }
   h1{
     font-family:'Chakra Petch', sans-serif;
-    font-weight:700; text-align:center; font-size:32px;
+    font-weight:700; text-align:center; font-size:38px;
     letter-spacing:1px; text-transform:uppercase;
     background:linear-gradient(180deg, #fff, var(--gold-bright));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .subtitle{ text-align:center; color:var(--muted); font-size:15px; margin-top:10px; max-width:460px; margin-left:auto; margin-right:auto; line-height:1.55; }
+  .subtitle{ text-align:center; color:var(--muted); font-size:15px; margin-top:12px; max-width:460px; margin-left:auto; margin-right:auto; line-height:1.6; }
 
   /* ===== Packages ===== */
   .packages{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-    gap:14px;
-    margin:36px 0 8px;
+    gap:16px;
+    margin:40px 0 8px;
+    align-items:stretch;
   }
   .pkg{
     background:linear-gradient(180deg, #15161a, #101113);
     border:1px solid var(--edge);
-    border-radius:14px;
-    padding:20px 16px;
-    text-align:center;
+    border-radius:16px;
+    padding:24px 18px;
     cursor:pointer;
-    transition:border-color .2s ease, transform .15s ease;
+    transition:border-color .2s ease, transform .15s ease, box-shadow .2s ease;
     position:relative;
+    display:flex; flex-direction:column;
   }
-  .pkg:hover{ transform:translateY(-2px); }
-  .pkg.selected{ border-color:var(--gold); box-shadow:0 0 0 1px rgba(230,165,60,0.4), 0 12px 26px -14px rgba(230,165,60,0.35); }
-  .pkg.selected::after{
-    content:'✓ Dipilih';
-    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
-    background:var(--gold); color:#1a1200;
-    font-family:'Chakra Petch', sans-serif; font-size:10px; font-weight:700; letter-spacing:0.5px;
-    padding:3px 10px; border-radius:999px; text-transform:uppercase;
-  }
-  .pkg-name{ font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:15px; letter-spacing:0.5px; text-transform:uppercase; color:#f4f2ee; }
-  .pkg-price{ font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:19px; color:var(--gold-bright); margin-top:8px; }
-  .pkg-price span{ font-size:11px; color:var(--muted); font-weight:500; }
-  .pkg-desc{ color:var(--muted); font-size:12.5px; margin-top:8px; line-height:1.5; }
-  .pkg-list{ list-style:none; margin-top:12px; text-align:left; display:flex; flex-direction:column; gap:6px; }
-  .pkg-list li{ font-size:12.5px; color:var(--text); display:flex; gap:6px; align-items:flex-start; }
-  .pkg-list li::before{ content:'•'; color:var(--gold); }
+  .pkg:hover{ transform:translateY(-3px); }
+  .pkg.selected{ border-color:var(--gold); box-shadow:0 0 0 1px rgba(230,165,60,0.4), 0 16px 30px -16px rgba(230,165,60,0.4); }
+  .pkg.recommended{ border-color:rgba(230,165,60,0.5); }
 
-  @media (max-width:560px){
+  .badge-top{
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    font-family:'Chakra Petch', sans-serif; font-size:10px; font-weight:700; letter-spacing:0.8px;
+    padding:4px 12px; border-radius:999px; text-transform:uppercase; white-space:nowrap;
+  }
+  .badge-selected{ background:var(--gold); color:#1a1200; }
+  .badge-recommended{ background:linear-gradient(120deg, var(--gold-bright), var(--gold)); color:#1a1200; }
+
+  .pkg-icon{
+    width:52px; height:52px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+  }
+  .pkg-icon.blue{ background:rgba(78,163,255,0.12); border:1px solid rgba(78,163,255,0.35); }
+  .pkg-icon.gold{ background:rgba(230,165,60,0.14); border:1px solid rgba(230,165,60,0.4); }
+  .pkg-icon.purple{ background:rgba(162,107,255,0.12); border:1px solid rgba(162,107,255,0.35); }
+
+  .pkg-name{ font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:14px; letter-spacing:1px; text-transform:uppercase; }
+  .pkg-name.blue{ color:var(--blue); }
+  .pkg-name.gold{ color:var(--gold-bright); }
+  .pkg-name.purple{ color:var(--purple); }
+
+  .pkg-price{ font-family:'Chakra Petch', sans-serif; font-weight:700; font-size:26px; color:#f4f2ee; margin-top:6px; }
+  .pkg-price span{ font-size:12px; color:var(--muted); font-weight:500; text-transform:none; letter-spacing:0; }
+
+  .pkg-desc{ color:var(--muted); font-size:13px; margin-top:10px; line-height:1.55; }
+
+  .pkg-divider{ height:1px; background:var(--edge); margin:16px 0 14px; }
+
+  .pkg-list{ list-style:none; display:flex; flex-direction:column; gap:9px; margin-top:auto; }
+  .pkg-list li{ font-size:13px; color:var(--text); display:flex; gap:8px; align-items:center; }
+  .pkg-list .tick{ width:16px; height:16px; flex:none; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .pkg-list .tick.blue{ background:rgba(78,163,255,0.15); color:var(--blue); }
+  .pkg-list .tick.gold{ background:rgba(230,165,60,0.18); color:var(--gold-bright); }
+  .pkg-list .tick.purple{ background:rgba(162,107,255,0.15); color:var(--purple); }
+
+  @media (max-width:640px){
     .packages{ grid-template-columns:1fr; }
+    h1{ font-size:30px; }
   }
 
   /* ===== Form ===== */
   .form-card{
     background:linear-gradient(180deg, #15161a, #101113);
     border:1px solid var(--edge);
-    border-radius:16px;
-    padding:28px 26px;
-    margin-top:28px;
+    border-radius:18px;
+    padding:30px 28px;
+    margin-top:32px;
+  }
+  .form-card-head{ display:flex; gap:14px; align-items:flex-start; margin-bottom:22px; }
+  .form-card-head .icon-box{
+    width:44px; height:44px; flex:none; border-radius:12px;
+    background:rgba(230,165,60,0.12); border:1px solid rgba(230,165,60,0.35);
+    display:flex; align-items:center; justify-content:center;
   }
   .form-card h2{
     font-family:'Chakra Petch', sans-serif;
     font-size:17px; letter-spacing:0.5px; text-transform:uppercase; color:#f4f2ee;
-    margin-bottom:18px;
   }
-  .field{ margin-bottom:16px; }
+  .form-card-head p{ color:var(--muted); font-size:13.5px; margin-top:4px; line-height:1.5; }
+
+  .field{ margin-bottom:18px; }
   .field label{
-    display:block; font-size:13px; color:var(--muted); margin-bottom:6px;
+    display:block; font-size:13px; color:var(--muted); margin-bottom:7px;
     letter-spacing:0.3px;
   }
+  .input-wrap{ position:relative; }
+  .input-wrap .icon{ position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--muted-2); display:flex; }
   .field input, .field select, .field textarea{
     width:100%;
     background:#17181b;
     border:1px solid #2c2d31;
-    border-radius:9px;
-    padding:11px 14px;
+    border-radius:10px;
+    padding:11px 14px 11px 40px;
     color:var(--text);
     font-family:'Rajdhani', sans-serif;
     font-size:15px;
@@ -127,11 +172,15 @@
     outline:none;
     transition:border-color .2s ease;
   }
+  .field select{ padding-left:14px; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239a9ba0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
+  .field textarea{ padding-left:14px; }
   .field input::placeholder, .field textarea::placeholder{ color:var(--muted-2); }
   .field input:focus, .field select:focus, .field textarea:focus{ border-color:rgba(230,165,60,0.55); }
-  .field textarea{ resize:vertical; min-height:100px; font-family:'Rajdhani', sans-serif; }
+  .field textarea{ resize:vertical; min-height:110px; font-family:'Rajdhani', sans-serif; }
   .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   @media (max-width:520px){ .row2{ grid-template-columns:1fr; } }
+
+  .char-count{ text-align:right; font-size:11.5px; color:var(--muted-2); margin-top:6px; }
 
   .selected-pkg-note{
     font-size:13px; color:var(--gold-bright);
@@ -148,10 +197,11 @@
     font-weight:700; font-size:14.5px; letter-spacing:1px; text-transform:uppercase;
     color:#1a1200;
     background:linear-gradient(160deg, var(--gold-bright), var(--gold));
-    border:none; border-radius:10px;
-    padding:14px;
+    border:none; border-radius:11px;
+    padding:15px;
     cursor:pointer;
     transition:filter .15s ease, transform .15s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
   }
   button[type="submit"]:hover{ filter:brightness(1.08); }
   button[type="submit"]:active{ transform:scale(0.98); }
@@ -179,6 +229,59 @@
   .success .summary b{ color:var(--gold-bright); }
 
   .required{ color:#ff8080; }
+
+  /* ===== Trust badges ===== */
+  .trust{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:12px;
+    margin-top:28px;
+  }
+  .trust-item{
+    background:linear-gradient(180deg, #15161a, #101113);
+    border:1px solid var(--edge);
+    border-radius:14px;
+    padding:16px 14px;
+    text-align:center;
+  }
+  .trust-icon{
+    width:38px; height:38px; margin:0 auto 10px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .trust-icon.blue{ background:rgba(78,163,255,0.12); color:var(--blue); border:1px solid rgba(78,163,255,0.3); }
+  .trust-icon.gold{ background:rgba(230,165,60,0.14); color:var(--gold-bright); border:1px solid rgba(230,165,60,0.35); }
+  .trust-icon.purple{ background:rgba(162,107,255,0.12); color:var(--purple); border:1px solid rgba(162,107,255,0.3); }
+  .trust-icon.green{ background:rgba(95,214,138,0.12); color:var(--ok); border:1px solid rgba(95,214,138,0.3); }
+  .trust-item h3{ font-family:'Chakra Petch', sans-serif; font-size:12.5px; letter-spacing:0.3px; color:#f4f2ee; text-transform:uppercase; }
+  .trust-item p{ font-size:11.5px; color:var(--muted); margin-top:6px; line-height:1.45; }
+
+  @media (max-width:640px){
+    .trust{ grid-template-columns:repeat(2, 1fr); }
+  }
+
+  /* ===== CTA footer ===== */
+  .cta-footer{
+    margin-top:24px;
+    background:linear-gradient(120deg, rgba(230,165,60,0.10), rgba(230,165,60,0.03));
+    border:1px solid rgba(230,165,60,0.3);
+    border-radius:18px;
+    padding:26px 24px;
+    display:flex; align-items:center; gap:16px;
+    justify-content:center;
+    text-align:left;
+  }
+  .cta-footer .icon-circle{
+    width:48px; height:48px; flex:none; border-radius:50%;
+    background:rgba(230,165,60,0.16); border:1px solid rgba(230,165,60,0.45);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-bright);
+  }
+  .cta-footer h3{ font-family:'Chakra Petch', sans-serif; font-size:15px; letter-spacing:0.3px; color:#f4f2ee; text-transform:uppercase; }
+  .cta-footer p{ font-size:13px; color:var(--muted); margin-top:4px; }
+
+  @media (max-width:520px){
+    .cta-footer{ flex-direction:column; text-align:center; }
+  }
 </style>
 </head>
 <body>
@@ -186,62 +289,95 @@
 <div class="wrap">
   <a href="wolfy-studio.html" class="back">&larr; Kembali ke Wolfy Studio</a>
 
-  <span class="eyebrow">Jasa Custom Map</span>
+  <span class="eyebrow">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M4 20V10l4-4 4 4v10M12 20v-6l4-4 4 4v6"/></svg>
+    Jasa Custom Map
+  </span>
   <h1>Pembuatan Map Roblox</h1>
   <p class="subtitle">Map custom sesuai kebutuhanmu — city, roleplay, horror, sampai simulator. Pilih paket, isi detail, dan tim kami akan menghubungimu untuk konfirmasi.</p>
 
   <!-- PACKAGES -->
   <div class="packages" id="packages">
     <div class="pkg" data-pkg="Basic" data-price="Mulai Rp400K">
-      <div class="pkg-name">Basic</div>
+      <div class="pkg-icon blue">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ea3ff" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <div class="pkg-name blue">Basic</div>
       <div class="pkg-price">Rp400K<span> / map kecil</span></div>
       <div class="pkg-desc">Cocok untuk map simulator sederhana atau area kecil.</div>
+      <div class="pkg-divider"></div>
       <ul class="pkg-list">
-        <li>1–2 area utama</li>
-        <li>Aset dasar & terrain</li>
-        <li>Revisi 1x</li>
+        <li><span class="tick blue">✓</span> 1–2 area utama</li>
+        <li><span class="tick blue">✓</span> Aset dasar &amp; terrain</li>
+        <li><span class="tick blue">✓</span> Revisi 1x</li>
       </ul>
     </div>
-    <div class="pkg" data-pkg="Pro" data-price="Mulai Rp800K">
-      <div class="pkg-name">Pro</div>
+
+    <div class="pkg recommended" data-pkg="Pro" data-price="Mulai Rp800K">
+      <div class="badge-top badge-recommended">Rekomendasi</div>
+      <div class="pkg-icon gold">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffc36b" stroke="#ffc36b" stroke-width="1"><polygon points="12 2 15 9 22 9.5 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.5 9 9"/></svg>
+      </div>
+      <div class="pkg-name gold">Pro</div>
       <div class="pkg-price">Rp800K<span> / map medium</span></div>
       <div class="pkg-desc">Untuk map roleplay atau city dengan detail lebih.</div>
+      <div class="pkg-divider"></div>
       <ul class="pkg-list">
-        <li>3–5 area / distrik</li>
-        <li>Lighting & atmosphere custom</li>
-        <li>Revisi 2x</li>
+        <li><span class="tick gold">✓</span> 3–5 area / distrik</li>
+        <li><span class="tick gold">✓</span> Lighting &amp; atmosphere custom</li>
+        <li><span class="tick gold">✓</span> Revisi 2x</li>
       </ul>
     </div>
+
     <div class="pkg" data-pkg="Custom" data-price="Nego sesuai kebutuhan">
-      <div class="pkg-name">Custom</div>
+      <div class="pkg-icon purple">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a26bff" stroke-width="1.8"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M11 3 8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+      </div>
+      <div class="pkg-name purple">Custom</div>
       <div class="pkg-price">Nego<span> / sesuai brief</span></div>
       <div class="pkg-desc">Map besar, horror kompleks, atau kebutuhan khusus lain.</div>
+      <div class="pkg-divider"></div>
       <ul class="pkg-list">
-        <li>Skala & scope fleksibel</li>
-        <li>Konsultasi desain penuh</li>
-        <li>Revisi sesuai kesepakatan</li>
+        <li><span class="tick purple">✓</span> Skala &amp; scope fleksibel</li>
+        <li><span class="tick purple">✓</span> Konsultasi desain penuh</li>
+        <li><span class="tick purple">✓</span> Revisi sesuai kesepakatan</li>
       </ul>
     </div>
   </div>
 
   <!-- FORM -->
   <div class="form-card" id="formCard">
-    <h2>Form Pemesanan</h2>
+    <div class="form-card-head">
+      <div class="icon-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffc36b" stroke-width="2"><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><path d="M8 4H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/></svg>
+      </div>
+      <div>
+        <h2>Form Pemesanan</h2>
+        <p>Isi detail kebutuhanmu dengan lengkap agar kami bisa memberikan hasil terbaik.</p>
+      </div>
+    </div>
+
     <div class="selected-pkg-note" id="pkgNote"></div>
     <form id="orderForm">
       <div class="row2">
         <div class="field">
           <label>Nama <span class="required">*</span></label>
-          <input type="text" id="name" placeholder="Nama kamu" required>
+          <div class="input-wrap">
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+            <input type="text" id="name" placeholder="Nama kamu" required>
+          </div>
         </div>
         <div class="field">
           <label>Kontak (WhatsApp/Discord) <span class="required">*</span></label>
-          <input type="text" id="contact" placeholder="08xx atau username#0000" required>
+          <div class="input-wrap">
+            <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <input type="text" id="contact" placeholder="08xx atau username#0000" required>
+          </div>
         </div>
       </div>
 
       <div class="field">
-        <label>Paket</label>
+        <label>Paket <span class="required">*</span></label>
         <select id="package">
           <option value="">Belum dipilih — klik salah satu kartu paket di atas</option>
           <option value="Basic">Basic</option>
@@ -252,15 +388,22 @@
 
       <div class="field">
         <label>Jenis Map</label>
-        <input type="text" id="mapType" placeholder="Contoh: city, roleplay, horror, simulator">
+        <div class="input-wrap">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span>
+          <input type="text" id="mapType" placeholder="Contoh: city, roleplay, horror, simulator">
+        </div>
       </div>
 
       <div class="field">
         <label>Detail Kebutuhan <span class="required">*</span></label>
-        <textarea id="details" placeholder="Jelasin konsep map, referensi, deadline, atau hal lain yang perlu kami tahu" required></textarea>
+        <textarea id="details" maxlength="1000" placeholder="Jelasin konsep map, referensi, deadline, atau hal lain yang perlu kami tahu" required></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 1000</div>
       </div>
 
-      <button type="submit">Kirim Pesanan</button>
+      <button type="submit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1200" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Kirim Pesanan
+      </button>
     </form>
   </div>
 
@@ -273,15 +416,71 @@
     <p>WhatsApp akan terbuka di tab baru dengan detail pesananmu sudah terisi otomatis. Tinggal tekan kirim di sana untuk menghubungi tim Wolfy Studio.</p>
     <div class="summary" id="summaryBox"></div>
   </div>
+
+  <!-- TRUST BADGES -->
+  <div class="trust">
+    <div class="trust-item">
+      <div class="trust-icon blue">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/></svg>
+      </div>
+      <h3>Aman &amp; Terpercaya</h3>
+      <p>Pengerjaan profesional dan komunikasi jelas.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon gold">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+      </div>
+      <h3>Tepat Waktu</h3>
+      <p>Deadline sesuai kesepakatan tanpa mengurangi kualitas.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon purple">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+      </div>
+      <h3>Hasil Berkualitas</h3>
+      <p>Detail rapi, performa optimal, dan siap rilis.</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11v3a2 2 0 0 0 2 2h1v-7H5a2 2 0 0 0-2 2z"/><path d="M21 11v3a2 2 0 0 1-2 2h-1v-7h1a2 2 0 0 1 2 2z"/><path d="M6 9a6 6 0 0 1 12 0"/><path d="M18 16v1a3 3 0 0 1-3 3h-2"/></svg>
+      </div>
+      <h3>Support Penuh</h3>
+      <p>Konsultasi dan revisi hingga kamu puas.</p>
+    </div>
+  </div>
+
+  <!-- CTA FOOTER -->
+  <div class="cta-footer">
+    <div class="icon-circle">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </div>
+    <div>
+      <h3>Siap wujudkan map impianmu?</h3>
+      <p>Tim kami akan segera menghubungimu setelah form dikirim.</p>
+    </div>
+  </div>
 </div>
 
 <script>
   const packages = document.querySelectorAll('.pkg');
   const pkgSelect = document.getElementById('package');
   const pkgNote = document.getElementById('pkgNote');
+  const details = document.getElementById('details');
+  const charCount = document.getElementById('charCount');
 
   function selectPackage(name){
-    packages.forEach(p => p.classList.toggle('selected', p.dataset.pkg === name));
+    packages.forEach(p => {
+      const isMatch = p.dataset.pkg === name;
+      p.classList.toggle('selected', isMatch);
+      const existingBadge = p.querySelector('.badge-selected');
+      if (existingBadge) existingBadge.remove();
+      if (isMatch) {
+        const badge = document.createElement('div');
+        badge.className = 'badge-top badge-selected';
+        badge.textContent = '✓ Dipilih';
+        p.appendChild(badge);
+      }
+    });
     pkgSelect.value = name;
     if(name){
       pkgNote.style.display = 'block';
@@ -296,6 +495,10 @@
   });
   pkgSelect.addEventListener('change', () => selectPackage(pkgSelect.value));
 
+  details.addEventListener('input', () => {
+    charCount.textContent = details.value.length;
+  });
+
   document.getElementById('orderForm').addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -303,7 +506,7 @@
     const contact = document.getElementById('contact').value.trim();
     const pkg = pkgSelect.value || '-';
     const mapType = document.getElementById('mapType').value.trim() || '-';
-    const details = document.getElementById('details').value.trim();
+    const detailsVal = details.value.trim();
 
     const WA_NUMBER = '6285117770968';
 
@@ -314,7 +517,7 @@ Nama: ${name}
 Kontak: ${contact}
 Paket: ${pkg}
 Jenis Map: ${mapType}
-Detail Kebutuhan: ${details}`;
+Detail Kebutuhan: ${detailsVal}`;
 
     const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
 
@@ -327,7 +530,7 @@ Detail Kebutuhan: ${details}`;
       <div><b>Kontak:</b> ${contact}</div>
       <div><b>Paket:</b> ${pkg}</div>
       <div><b>Jenis Map:</b> ${mapType}</div>
-      <div><b>Detail:</b> ${details}</div>
+      <div><b>Detail:</b> ${detailsVal}</div>
     `;
 
     window.scrollTo({top: 0, behavior:'smooth'});
